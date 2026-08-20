@@ -79,12 +79,6 @@ shortcodes:
 [$$E = \frac{1}{2} m v^2 + mgL(1-\cos\theta)$$]{.fragment}
 :::
 
-## 
-
-::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 50vh; text-align: center;"}
-$$E = \frac{1}{2} m v^2 + mgL(1-\cos\theta)$$
-:::
-
 ## [O Pêndulo Simples]{.title-sec}
 
 {{< InsertVideo 
@@ -148,15 +142,103 @@ Vamos explorar a ideia...
     desc3="Pêndulo, $\theta=170^\circ, v=8$m/s"
 >}}
 
-## [O que aprendemos?]{.title-sec}
+## [O que podemos aprender com o pêndulo simples?]{.title-sec}
 
+::::{style="display: flex; justify-content: space-around; align-items: center;"}
+::: {.incremental}
+- Precisamos estudar a posição da massa, $\theta$ 
+- Bem como a sua velocidade, $v$
+- Podemos escrever *movimentos diferentes* para cada par $(\theta,v)$
+- A energia tem grande influência no movimento resultante.
+:::
+::::
+
+##
+{{< MakeChapter 
+  numbering="03" 
+  titulo="Espaço de Fase" 
+  desc="Descrevendo as possíveis dinâmicas diferentes de um sistema."
+  img="https://assets.tmfss.net/chaosminicurse/figs/poincare_img.svg" 
+>}}
+
+##  [Construindo o Espaço de Fase]{.title-sec}
+{{< VideoImage
+    src1="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_pequeno.webm"
+    desc1="Pêndulo, $\theta=17^\circ, v=0$"
+    src2="https://assets.tmfss.net/chaosminicurse/figs/phase_1.svg"
+    desc2="Visualização do movimento com o par $(\theta,v)$"
+>}}
+
+##  [Construindo o Espaço de Fase]{.title-sec}
+{{< VideoImage
+    src1="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_medio.webm"
+    desc1="Pêndulo, $\theta=90^\circ, v=0$"
+    src2="https://assets.tmfss.net/chaosminicurse/figs/phase_2.svg"
+    desc2="Visualização do movimento com o par $(\theta,v)$"
+>}}
+
+##  [Construindo o Espaço de Fase]{.title-sec}
+{{< VideoImage
+    src1="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_extremo.webm"
+    desc1="Pêndulo, $\theta=170^\circ, v=0$"
+    src2="https://assets.tmfss.net/chaosminicurse/figs/phase_3.svg"
+    desc2="Visualização do movimento com o par $(\theta,v)$"
+>}}
+
+##  [Construindo o Espaço de Fase (Alta Energia)]{.title-sec}
+{{< VideoImage
+    src1="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_pequeno_fast.webm"
+    desc1="Pêndulo, $\theta=17^\circ, v=8$ m/s"
+    src2="https://assets.tmfss.net/chaosminicurse/figs/phase_4.svg"
+    desc2="Visualização do movimento com o par $(\theta,v)$"
+>}}
+
+##  [Construindo o Espaço de Fase (Alta Energia)]{.title-sec}
+{{< VideoImage
+    src1="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_medio_fast.webm"
+    desc1="Pêndulo, $\theta=90^\circ, v=8$ m/s"
+    src2="https://assets.tmfss.net/chaosminicurse/figs/phase_5.svg"
+    desc2="Visualização do movimento com o par $(\theta,v)$"
+>}}
+
+##  [Construindo o Espaço de Fase (Alta Energia)]{.title-sec}
+{{< VideoImage
+    src1="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_extremo_fast.webm"
+    desc1="Pêndulo, $\theta=170^\circ, v=8$ m/s"
+    src2="https://assets.tmfss.net/chaosminicurse/figs/phase_6.svg"
+    desc2="Visualização do movimento com o par $(\theta,v)$"
+>}}
+
+
+## [O Espaço de Fase]{.title-sec}
+
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/phase_full.svg){width="100%"}
+
+[O mapa que nos mostra *tudo o que o pêndulo pode fazer*!]{.fragment style="color: #adb5bd;"}
+:::
+
+## [Recaptulando o Espaço de Fase]{.title-sec}
+
+::::{style="display: flex; justify-content: space-around; align-items: center;"}
+::: {.incremental}
+- Temos **toda** informação do sistema!
+- As curvas no espaço de fase representam os pontos que aquele movimento visita.
+- A energia determina a região do espaço de fase que será visitada.
+:::
+::::
 
 ## [O Pêndulo Duplo]{.title-sec}
 
-:::: {style="position: relative; height: 90vh;"}
+::: {style="display: flex; justify-content: space-around; align-items: center;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/dp_diagram_1.svg){.fragment width="90%" .absolute top=-70 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/dp_diagram_2.svg){.fragment width="90%" .absolute top=-70 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/dp_diagram_3.svg){.fragment width="90%" .absolute top=-70 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/dp_diagram_4.svg){.fragment width="90%" .absolute top=-70 left=0 right=0 style="margin: auto;"}
+:::
 
-<!-- A equação fica presa no topo (top=20) -->
-::: {.fragment .absolute top=-50 left=0 right=0 style="font-size: 50%;" }
+## [O Pêndulo Duplo]{.title-sec}
+::: {.fragment style="display: flex; justify-content: space-around; align-items: center;"}
 $$
 \begin{aligned}
 E &= \frac{1}{2} m_1 v_1^2 + \frac{1}{2} m_2v_2^2 + 2 v_1v_2\cos(\theta_1 - \theta_2) \\
@@ -165,14 +247,6 @@ E &= \frac{1}{2} m_1 v_1^2 + \frac{1}{2} m_2v_2^2 + 2 v_1v_2\cos(\theta_1 - \the
 $$
 :::
 
-<!-- As imagens foram empurradas mais para baixo (top=220) para não bater na equação -->
-![](https://assets.tmfss.net/chaosminicurse/figs/dp_diagram_1.svg){.fragment width="90%" .absolute top=-70 left=0 right=0 style="margin: auto;"}
-![](https://assets.tmfss.net/chaosminicurse/figs/dp_diagram_2.svg){.fragment width="90%" .absolute top=-70 left=0 right=0 style="margin: auto;"}
-![](https://assets.tmfss.net/chaosminicurse/figs/dp_diagram_3.svg){.fragment width="90%" .absolute top=-70 left=0 right=0 style="margin: auto;"}
-![](https://assets.tmfss.net/chaosminicurse/figs/dp_diagram_4.svg){.fragment width="90%" .absolute top=-70 left=0 right=0 style="margin: auto;"}
-
-::::
-
 ## [O Pêndulo Duplo]{.title-sec}
 
 <video data-autoplay muted loop playsinline controls width="100%">
@@ -180,6 +254,21 @@ $$
     Seu navegador não suporta a tag de vídeo.
 </video>
 
+##  [O Pêndulo Duplo]{.title-sec}
+{{< VideoVideo
+    src1="https://assets.tmfss.net/chaosminicurse/ani/trajec_dp_4530.webm"
+    desc1="Pêndulo, $\theta=170^\circ, v=8$ m/s"
+    src2="https://assets.tmfss.net/chaosminicurse/ani/trajec_dp_4630.webm"
+    desc2="Visualização do movimento com o par $(\theta,v)$"
+>}}
+
+##
+{{< MakeChapter 
+  numbering="04" 
+  titulo="Fronteira do Caos" 
+  desc="Transição para desordem: expoentes de Lyapunov e seções de Poincaré"
+  img="https://upload.wikimedia.org/wikipedia/pt/0/03/Close_to_the_Edge_-_Yes.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original" 
+>}}
 
 ## [Sensibilidade às condições iniciais]{.title-sec}
 
@@ -188,22 +277,100 @@ $$
     Seu navegador não suporta a tag de vídeo.
 </video>
 
+## [Sensibilidade às condições iniciais]{.title-sec}
+
+<video data-autoplay muted loop playsinline width="100%">
+  <source src="https://assets.tmfss.net/chaosminicurse/ani/trajec_chaos.webm" type="video/webm">
+    Seu navegador não suporta a tag de vídeo.
+</video>
+
+## [Flip]{.title-sec}
+
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/phase_position_flip.svg){width="100%"}
+
+[Diagrama de "flip"]{.fragment style="color: #adb5bd;"}
+:::
+
+## [Lyapunov]{.title-sec}
+
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/phase_position_lya.svg){width="100%"}
+
+[Expoentes de Lyapunov]{.fragment style="color: #adb5bd;"}
+:::
+
+## [Flip]{.title-sec}
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/phase_moment_flip.svg){width="100%"}
+
+[Diagrama de "flip"]{.fragment style="color: #adb5bd;"}
+:::
+
+## [O Espaço de Fase]{.title-sec}
+
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/phase_moment_lya.svg){width="100%"}
+
+[Expoentes de Lyapunov]{.fragment style="color: #adb5bd;"}
+:::
+
+## [Entendendo]{.title-sec}
+
+::::{style="display: flex; justify-content: space-around; align-items: center;"}
+::: {.incremental}
+- O que o mapa de "flip" nos diz?
+- O que o mapa de Lyapunov nos diz?
+- Qual o papel da energia?
+:::
+::::
+
+## [Seções de Poincaré]{.title-sec}
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/poincare_section_E1.svg){width="100%"}
+
+[Seção de Poincaré]{style="color: #adb5bd;"}
+:::
+
+## [Seções de Poincaré]{.title-sec}
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/poincare_section_E2.svg){width="100%"}
+
+[Seção de Poincaré]{style="color: #adb5bd;"}
+:::
+
+## [Seções de Poincaré]{.title-sec}
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/poincare_section_E3.svg){width="100%"}
+
+[Seção de Poincaré]{style="color: #adb5bd;"}
+:::
+
+## [Seções de Poincaré]{.title-sec}
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/poincare_section_E4.svg){width="100%"}
+
+[Seção de Poincaré]{style="color: #adb5bd;"}
+:::
+
+## [Seções de Poincaré]{.title-sec}
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/poincare_section_E5.svg){width="100%"}
+
+[Seção de Poincaré]{style="color: #adb5bd;"}
+:::
+
+## [Seções de Poincaré]{.title-sec}
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 60vh;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/poincare_section_E6.svg){width="100%"}
+
+[Seção de Poincaré]{style="color: #adb5bd;"}
+:::
 
 ##
 {{< MakeChapter 
-  numbering="03" 
-  titulo="Espaço de Fase" 
-  desc="Sistemas meteorológicos, criptografia e dinâmicas populacionais complexas." 
-  img="https://assets.tmfss.net/chaosminicurse/figs/poincare_img.svg" 
->}}
-
-##  [Definindo o espaço de fase]{.title-sec}
-
-
-##
-{{< MakeChapter 
-  numbering="04" 
-  titulo="Fronteira do Caos" 
-  desc="Transição para desordem: expoentes de Lyapunov e seções de Poincaré"
+  numbering="05" 
+  titulo="Conclusão" 
+  desc="Enxergando caos na natureza"
   img="https://upload.wikimedia.org/wikipedia/pt/0/03/Close_to_the_Edge_-_Yes.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original" 
 >}}
