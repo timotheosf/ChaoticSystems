@@ -1,0 +1,74 @@
+---
+format: revealjs
+shortcodes:
+  - room/macros/shortcuts.lua
+---
+
+{{< include room/macros/_titleIndex.qmd >}}
+
+##
+{{< MakeChapter
+  numbering="01"
+  titulo="Caos e Física"
+  desc="O problema de definir Complexidade na Física"
+  img="https://upload.wikimedia.org/wikipedia/commons/7/71/Lorenz_system_r28_s10_b2-6666.png"
+>}}
+
+## [Caos e Física]{.title-sec}
+
+::: {style="display: flex; justify-content: space-around; align-items: center;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/complex_wide_1.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/complex_wide_2.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/complex_wide_3.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/complex_wide_4.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/complex_wide_5.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/complex_wide_6.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/complex_wide_7.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/complex_wide_8.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/complex_wide_9.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
+:::
+
+##
+{{< MakeChapter
+  numbering="02"
+  titulo="Pêndulos"
+  desc="Os problemas do pêndulo simples e do pêndulo duplo."
+  img=""
+>}}
+
+
+
+## [O Pêndulo Duplo]{.title-sec}
+
+<video data-autoplay muted loop playsinline width="100%">
+  <source src="https://assets.tmfss.net/chaosminicurse/ani/trajec_unstable_1.webm" type="video/webm">
+    Seu navegador não suporta a tag de vídeo.
+</video>
+
+
+## Sensibilidade às condições iniciais
+
+<video data-autoplay muted loop playsinline width="100%">
+  <source src="https://assets.tmfss.net/chaosminicurse/ani/trajec_chaos.webm" type="video/webm">
+    Seu navegador não suporta a tag de vídeo.
+</video>
+
+
+##
+{{< MakeChapter 
+  numbering="03" 
+  titulo="Espaço de Fase" 
+  desc="Sistemas meteorológicos, criptografia e dinâmicas populacionais complexas." 
+  img="https://assets.tmfss.net/chaosminicurse/figs/poincare_img.svg" 
+>}}
+
+##  [Definindo o espaço de fase]{.title-sec}
+
+
+##
+{{< MakeChapter 
+  numbering="04" 
+  titulo="Fronteira do Caos" 
+  desc="Transição para desordem: expoentes de Lyapunov e seções de Poincaré"
+  img="https://upload.wikimedia.org/wikipedia/pt/0/03/Close_to_the_Edge_-_Yes.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original" 
+>}}

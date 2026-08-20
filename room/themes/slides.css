@@ -1,0 +1,291 @@
+  /* A linha com gradiente */
+  .linha-gradiente {
+    height: 3px;
+    width: 150px;
+    background: linear-gradient(90deg, #1E90FF, #FF1493); /* Azul para Rosa */
+    margin-bottom: 20px;
+  }
+  .caixa-logos {
+    background-color: rgba(20, 28, 43, 0.85);
+    border-radius: 15px;
+    padding: 20px 20px;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 60px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .boxing {
+    background-color: rgba(20, 28, 43, 0.4);
+    border-radius: 15px;
+    padding: 20px 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  /* Ajuste para as imagens dentro da caixa */
+  .caixa-logos img {
+    max-height: 80px; 
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 0 !important;
+    /* A MÁGICA ESTÁ AQUI: Isso empurra a imagem da direita */
+    margin-right: 50px !important; 
+  }
+
+  /* Tira a margem da última imagem para não sobrar espaço inútil no final da caixa */
+  .caixa-logos img:last-child {
+    margin-right: 0 !important;
+  }
+
+.SubtitleGradient {
+  position: relative; /* Necessário para ancorar o ::before */
+  color: #4da6ff;
+  font-size: 0.7em; /* Reduzido drasticamente para a escala do Reveal */
+  font-weight: 700;
+  font-family: monospace;
+  margin-right: 20px;
+  line-height: 1;
+}
+
+.SubtitleGradient::before {
+  content: ""; /* OBRIGATÓRIO para o elemento existir */
+  position: absolute; /* Permite usar top e left */
+  display: block; 
+  height: 3px;
+  width: 150px;
+  background: linear-gradient(90deg, #1E90FF, #FF1493);
+  top: -7px; /* Ajuste a distância vertical (exemplo acima do texto) */
+  left: 0;
+}
+
+.NumberingGradient {
+  position: relative; /* Necessário para ancorar o ::before */
+  color: #4da6ff;
+  font-size: 2em; /* Reduzido drasticamente para a escala do Reveal */
+  font-weight: 700;
+  font-family: monospace;
+  margin-right: 20px;
+  line-height: 1;
+}
+
+.NumberingGradient::before {
+  content: ""; /* OBRIGATÓRIO para o elemento existir */
+  position: absolute; /* Permite usar top e left */
+  display: block; 
+  height: 5px;
+  width: 1.2em;
+  background: linear-gradient(90deg, #1E90FF, #FF1493);
+  top: -4px; /* Ajuste a distância vertical (exemplo acima do texto) */
+  left: 0;
+}
+
+.subtitulo {
+color: #4da6ff;
+font-size: 0.7em;
+font-weight: 700;
+letter-spacing: 2px;
+font-family: monospace;
+}
+
+.titulo-principal {
+font-size: 2em !important;
+font-weight: 300;
+line-height: 1.1;
+}
+
+.caixa-logos {
+background-color: rgba(20, 28, 43, 0.85);
+border-radius: 15px;
+padding: 20px 20px;
+display: inline-flex;
+align-items: center;
+margin-top: 60px;
+border: 1px solid rgba(255,255,255,0.05);
+}
+
+.caixa-logos img {
+max-height: 80px;
+margin: 0 50px 0 0 !important;
+}
+
+.caixa-logos img:last-child {
+margin-right: 0 !important;
+}
+
+.title-sec::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+height: 3px;
+width: 150px;
+background: linear-gradient(90deg, #1E90FF, #FF1493);
+}
+
+/* 3. O subtítulo quebra a linha sozinho, empurrando o título principal para baixo */
+.title-sec {
+  display: block; /* A mágica que substitui o <br> ou tags HTML */
+  color: #4da6ff;
+  font-size: 0.4em; /* Reduzido porque o h2 base já tem um tamanho grande */
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-family: monospace;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  padding-top: 10px;
+}
+
+.reveal-viewport { /* Cria o gradiente radial inspirado na imagem (azul escuro para quase preto) */ background: radial-gradient(circle at top right, #172235, #07090e 80%) !important; background-color: #07090e !important; }
+
+/* A malha principal que organiza os cartões em 2 colunas */
+.indice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* A malha principal */
+.indice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px; /* Reduzido para encaixar todos os 6 cartões na altura do slide */
+  margin-top: 15px;
+}
+
+/* O design do fundo de cada cartão */
+.indice-card {
+  background-color: rgba(25, 33, 48, 0.9);
+  border-radius: 12px;
+  padding: 15px 20px; /* Preenchimento mais contido */
+  display: flex;
+  align-items: center; /* Centraliza o número e o texto verticalmente */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* O número gigante azul */
+.indice-card .numero {
+  color: #4da6ff;
+  font-size: 1.6em; /* Reduzido drasticamente para a escala do Reveal */
+  font-weight: 700;
+  font-family: monospace;
+  margin-right: 20px;
+  line-height: 1;
+}
+
+/* A caixa de textos à direita */
+.indice-card .textos {
+  display: flex;
+  flex-direction: column;
+  text-align: left !important; /* Quebra o padrão de centralizar tudo do Reveal */
+  justify-content: center;
+  width: 100%;
+}
+
+/* MATA as margens e reduz a entrelinha dos parágrafos dentro do cartão */
+.reveal .indice-card .textos p {
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  line-height: 1.1 !important; /* Remove o espaço extra invisível gerado pelo motor */
+}
+
+/* O título em negrito */
+.reveal .indice-card .textos strong {
+  color: #ffffff;
+  font-size: 0.7em;
+  line-height: 1.1 !important;
+  display: block;
+  margin-bottom: 2px !important; /* Espaçamento milimétrico e controlado */
+}
+
+/* Esconde a quebra de linha invisível gerada pelo Markdown */
+.reveal .indice-card .textos br {
+  display: none !important;
+}
+
+/* O título em negrito */
+.reveal .indice-card .textos strong {
+  color: #ffffff;
+  font-size: 0.7em;
+  line-height: 1 !important;
+  display: block;
+  margin-bottom: 0 !important; /* Zerado */
+}
+
+/* A descrição */
+.reveal .indice-card .textos .desc {
+  color: #8c9baf;
+  font-size: 0.5em;
+  line-height: 1.2 !important;
+  display: block;
+  margin-top: 4px !important; /* Margem negativa! Aumente para -5px ou -8px se quiser o texto ainda mais colado no título */
+}
+
+/* --- LAYOUT DE ABERTURA DE CAPÍTULO --- */
+
+/* 2. O Grid que divide a tela e centraliza verticalmente */
+.capitulo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center; /* Centraliza no meio da tela! */
+  height: 600px; /* Garante altura suficiente para o alinhamento */
+  gap: 50px;
+}
+
+/* 3. Coluna da Esquerda (Textos) */
+.capitulo-textos {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* A linha gradiente manual para esse bloco */
+.linha-gradiente-capitulo {
+  height: 3px;
+  width: 150px;
+  background: linear-gradient(90deg, #1E90FF, #FF1493);
+  margin-bottom: 25px;
+}
+
+/* O Título Gigante (transformado em bloco) */
+.capitulo-textos .titulo-gigante {
+  display: block; /* Faz se comportar como um H1 */
+  font-size: 2.8em;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 25px;
+}
+
+/* A descrição menor em cinza */
+.capitulo-textos .desc {
+  display: block;
+  color: #8c9baf;
+  font-size: 0.9em;
+  line-height: 1.3;
+}
+
+/* 4. Coluna da Direita e a Mágica do Crop Circular */
+.capitulo-imagem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.capitulo-imagem img {
+  width: 480px;  /* Tamanho da bola - Largura */
+  height: 480px; /* Tamanho da bola - Altura (deve ser igual à largura) */
+  object-fit: cover; /* Preenche a bola sem distorcer a foto */
+  border-radius: 50%; /* Arredonda até virar um círculo */
+  border: 1px solid rgba(77, 166, 255, 0.2); /* Bordinha azul bem sutil */
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4); /* Sombra para descolar do fundo */
+}
+
+.color-number {
+  color: #4da6ff;
+  font-size: 2em; /* Reduzido drasticamente para a escala do Reveal */
+  font-weight: 700;
+  font-family: monospace;
+  margin-right: 20px;
+  line-height: 1;
+}

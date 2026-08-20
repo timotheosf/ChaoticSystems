@@ -1,0 +1,85 @@
+---
+title: Integrador de Verlet
+---
+
+# Integrador de Verlet (Leapfrog)
+
+O integrador de Verlet — e suas variantes como o *Position Verlet* ou *Leapfrog* — constitui o algoritmo simplético de 2ª ordem mais fundamental para a resolução de sistemas hamiltonianos separáveis. 
+
+Considere um sistema caracterizado por um Hamiltoniano da forma $H(q,p) = T(p) + V(q)$, onde $T(p)$ representa a energia cinética e $V(q)$ a energia potencial. As equações de movimento dadas pelo formalismo de Hamilton são:
+
+$$ \dot{q} = \nabla_p T(p) $$
+$$ \dot{p} = -\nabla_q V(q) $$
+
+## Formulação Algorítmica via Splitting
+
+No formalismo de operadores de Lie, o operador de evolução temporal do sistema pode ser escrito como $\exp(\Delta t L_H) = \exp(\Delta t (L_T + L_V))$. Para obter um integrador de 2ª ordem, utiliza-se a fatoração simétrica de Strang (Strang Splitting), que aproxima a exponencial do operador composto por uma sequência simétrica de operadores isolados:
+
+$$ \exp(\Delta t (L_T + L_V)) = \exp\left(\frac{\Delta t}{2} L_V\right) \exp(\Delta t L_T) \exp\left(\frac{\Delta t}{2} L_V\right) + \mathcal{O}(\Delta t^3) $$
+
+A aplicação sequencial desses três operadores de Lie ao vetor de estado $(q_n, p_n)$ traduz-se algebricamente no algoritmo de *Position Verlet*. Para um passo de tempo $\Delta t$, o estado avança para $(q_{n+1}, p_{n+1})$ através das seguintes equações de atualização:
+
+1. **Atualização do momento em meio passo temporal:**
+   $$ p_{n+1/2} = p_n - \frac{\Delta t}{2} \nabla_q V(q_n) $$
+
+2. **Atualização da posição em um passo temporal completo:**
+   $$ q_{n+1} = q_n + \Delta t \nabla_p T(p_{n+1/2}) $$
+
+3. **Atualização do momento no meio passo temporal remanescente:**
+   $$ p_{n+1} = p_{n+1/2} - \frac{\Delta t}{2} \nabla_q V(q_{n+1}) $$
+
+Este esquema numérico é simétrico sob reversão temporal ($t \to -t, \Delta t \to -\Delta t$), o que justifica a supressão natural dos termos de erro de ordem par na expansão de Taylor, garantindo precisão local de ordem $\mathcal{O}(\Delta t^3)$ e precisão global de ordem $\mathcal{O}(\Delta t^2)$.
+
+## Demonstração da Propriedade Simplética
+
+Para provar rigorosamente que o integrador de Verlet é um método simplético, devemos demonstrar que a transformação discreta $\Phi_{\Delta t}: (q_n, p_n) \mapsto (q_{n+1}, p_{n+1})$ satisfaz a condição de simpleticidade global. Em termos de álgebra linear, a matriz Jacobiana total da transformação, $M$, deve satisfazer:
+
+$$ M^T J M = J $$
+
+onde $J = \begin{pmatrix} 0 & I \\ -I & 0 \end{pmatrix}$ é a matriz simplética fundamental e $I$ é a matriz identidade $d \times d$. 
+
+Sendo o método formulado pela composição de três sub-transformações, $\Phi_{\Delta t} = \Phi_3 \circ \Phi_2 \circ \Phi_1$, podemos aplicar a regra da cadeia para obter a Jacobiana total $M = M_3 M_2 M_1$. Se cada $M_i$ for simplética, o produto também o será, uma vez que as matrizes simpléticas formam o grupo simplético $Sp(2d, \mathbb{R})$.
+
+### 1. Primeira Sub-transformação ($\Phi_1$)
+A transformação $\Phi_1$ leva $(q_n, p_n)$ a $(q_n, p_{n+1/2})$. Diferenciando a equação do Passo 1:
+$$ dq_n \to dq_n $$
+$$ dp_{n+1/2} = dp_n - \frac{\Delta t}{2} \nabla_q^2 V(q_n) dq_n $$
+
+A Jacobiana associada é:
+$$ M_1 = \begin{pmatrix} I & 0 \\ -\frac{\Delta t}{2} V'' & I \end{pmatrix} $$
+onde $V'' = \nabla_q^2 V(q_n)$ é a matriz Hessiana do potencial, que é estritamente simétrica ($(V'')^T = V''$). 
+
+Verificando a simpleticidade de $M_1$:
+$$ M_1^T J M_1 = \begin{pmatrix} I & -\frac{\Delta t}{2} V'' \\ 0 & I \end{pmatrix} \begin{pmatrix} 0 & I \\ -I & 0 \end{pmatrix} \begin{pmatrix} I & 0 \\ -\frac{\Delta t}{2} V'' & I \end{pmatrix} $$
+
+Multiplicando as duas últimas matrizes:
+$$ J M_1 = \begin{pmatrix} -\frac{\Delta t}{2} V'' & I \\ -I & 0 \end{pmatrix} $$
+
+Multiplicando pela matriz transposta à esquerda:
+$$ M_1^T (J M_1) = \begin{pmatrix} I & -\frac{\Delta t}{2} V'' \\ 0 & I \end{pmatrix} \begin{pmatrix} -\frac{\Delta t}{2} V'' & I \\ -I & 0 \end{pmatrix} = \begin{pmatrix} -\frac{\Delta t}{2} V'' + \frac{\Delta t}{2} V'' & I \\ -I & 0 \end{pmatrix} = \begin{pmatrix} 0 & I \\ -I & 0 \end{pmatrix} = J $$
+Portanto, a sub-transformação $\Phi_1$ é estritamente simplética.
+
+### 2. Segunda Sub-transformação ($\Phi_2$)
+A transformação $\Phi_2$ avança a coordenada: $(q_n, p_{n+1/2}) \mapsto (q_{n+1}, p_{n+1/2})$.
+Diferenciando o Passo 2:
+$$ dq_{n+1} = dq_n + \Delta t \nabla_p^2 T(p_{n+1/2}) dp_{n+1/2} $$
+$$ dp_{n+1/2} \to dp_{n+1/2} $$
+
+A Jacobiana correspondente, com a Hessiana simétrica da energia cinética $T'' = \nabla_p^2 T(p_{n+1/2})$, é:
+$$ M_2 = \begin{pmatrix} I & \Delta t T'' \\ 0 & I \end{pmatrix} $$
+
+Verificando a simpleticidade:
+$$ M_2^T J M_2 = \begin{pmatrix} I & 0 \\ \Delta t T'' & I \end{pmatrix} \begin{pmatrix} 0 & I \\ -I & 0 \end{pmatrix} \begin{pmatrix} I & \Delta t T'' \\ 0 & I \end{pmatrix} $$
+$$ = \begin{pmatrix} I & 0 \\ \Delta t T'' & I \end{pmatrix} \begin{pmatrix} 0 & I \\ -I & -\Delta t T'' \end{pmatrix} = \begin{pmatrix} 0 & I \\ -I & \Delta t T'' - \Delta t T'' \end{pmatrix} = \begin{pmatrix} 0 & I \\ -I & 0 \end{pmatrix} = J $$
+Logo, $\Phi_2$ também é simplética.
+
+### 3. Terceira Sub-transformação ($\Phi_3$)
+A transformação $\Phi_3$ possui estrutura idêntica à de $\Phi_1$, mapeando o momento final: $(q_{n+1}, p_{n+1/2}) \mapsto (q_{n+1}, p_{n+1})$. A matriz Jacobiana $M_3$ assume a mesma forma analítica de $M_1$, porém avaliada em $q_{n+1}$. Pela mesma dedução feita para $M_1$, segue trivialmente que $M_3^T J M_3 = J$.
+
+### Conclusão da Demonstração
+Uma vez que o método de Verlet é definido pela composição $\Phi_{\Delta t} = \Phi_3 \circ \Phi_2 \circ \Phi_1$, a Jacobiana do mapa total é o produto $M = M_3 M_2 M_1$. Pela propriedade algébrica do grupo simplético sob a operação de produto:
+
+$$ M^T J M = (M_3 M_2 M_1)^T J (M_3 M_2 M_1) = M_1^T M_2^T (M_3^T J M_3) M_2 M_1 $$
+$$ = M_1^T (M_2^T J M_2) M_1 = M_1^T J M_1 = J $$
+
+Este resultado demonstra analiticamente que o integrador de Verlet preserva a 2-forma simplética do espaço de fase para qualquer passo temporal numérico $\Delta t$, garantindo a ausência de dissipação artificial na evolução de sistemas conservativos.

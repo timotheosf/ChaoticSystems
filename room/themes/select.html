@@ -1,0 +1,34 @@
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Procura todos os itens do nosso dropdown
+    const links = document.querySelectorAll(".dropdown-item");
+    let btnLight, btnDark;
+    
+    // Identifica quem é o botão Light e quem é o botão Dark pelo texto
+    links.forEach(link => {
+        if(link.textContent.includes("Light")) btnLight = link;
+        if(link.textContent.includes("Dark")) btnDark = link;
+    });
+
+    // Pega o botão invisível original do Quarto
+    const nativeToggle = document.querySelector(".quarto-color-scheme-toggle");
+
+    if (btnLight && btnDark && nativeToggle) {
+        // Se clicar no Light e o site estiver Dark, aperta o botão!
+        btnLight.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (document.body.classList.contains("quarto-dark")) {
+                nativeToggle.click();
+            }
+        });
+
+        // Se clicar no Dark e o site estiver Light, aperta o botão!
+        btnDark.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (document.body.classList.contains("quarto-light")) {
+                nativeToggle.click();
+            }
+        });
+    }
+});
+</script>

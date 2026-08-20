@@ -1,0 +1,63 @@
+---
+title: Integradores Simpléticos
+---
+
+Um integrador simplético, em resumo, é um método numérico para integrar equações diferenciais ordinárias que mantém a propriedade simplética dos fluxos hamiltonianos (como a conservação da energia).
+
+Em resumo, para fazer a evolução do sistema do estado
+
+# Integradores Simpléticos
+
+No escopo da mecânica hamiltoniana, a evolução temporal de um sistema não é apenas um problema de valor inicial para equações diferenciais ordinárias (EDOs), mas sim um fluxo unidimensional contínuo de transformações canônicas. 
+
+Seja um sistema descrito pelo vetor de estado $z = (q, p)^T \in \mathbb{R}^{2d}$, onde $d$ é o número de graus de liberdade. As equações de Hamilton podem ser escritas na forma compacta:
+
+$$ \dot{z} = J \nabla H(z) $$
+
+onde $\nabla H$ é o gradiente do Hamiltoniano em relação a $z$, e $J$ é a matriz simplética fundamental dada por:
+
+$$ J = \begin{pmatrix} 0 & I \\ -I & 0 \end{pmatrix} $$
+
+com $I$ sendo a matriz identidade de dimensão $d \times d$.
+
+A solução exata desse sistema, que mapeia o estado $z(t)$ para $z(t + \Delta t)$, é denotada pelo fluxo de fase $\Phi_{\Delta t}$. Pelo teorema de Liouville, e mais intrinsecamente pela preservação da 2-forma simplética de Poincaré-Cartan ($\omega = \sum dq_i \wedge dp_i$), o fluxo exato satisfaz a condição de simpleticidade:
+
+$$ M^T J M = J $$
+
+onde $M = \frac{\partial \Phi_{\Delta t}(z)}{\partial z}$ é a matriz Jacobiana da transformação.
+
+## O Problema dos Integradores Clássicos
+
+Métodos numéricos genéricos, como os da família explícita de Runge-Kutta, são projetados para minimizar o erro de truncamento de expansões de Taylor locais. Ao aplicar um método genérico, a matriz Jacobiana do mapa numérico $\tilde{\Phi}_{\Delta t}$ falha em satisfazer a equação $M^T J M = J$. 
+
+Consequentemente, o método introduz uma quebra espúria na estrutura geométrica do espaço de fase, manifestando-se como dissipação ou excitação artificial de energia a longo prazo. Para sistemas caóticos, cuja análise depende estritamente da preservação do hipervolume no espaço de fase, a introdução desse amortecimento numérico invalida o cálculo dos expoentes de Lyapunov e descaracteriza seções de Poincaré.
+
+## Construção via Operadores de Lie e Splitting
+
+Um **integrador simplético** é um algoritmo cujo mapa discreto garante que a condição $M^T J M = J$ seja exata, a despeito do erro de truncamento na trajetória temporal.
+
+A formulação matemática mais robusta para construir esses integradores utiliza o formalismo dos operadores de Lie. Definimos o operador de Lie diferencial associado a uma função $F$ como $L_F \cdot = \{\cdot, F\}$, onde $\{\cdot, \cdot\}$ é o parêntese de Poisson. 
+
+A evolução temporal formal do estado do sistema é dada pela exponencial do operador de Lie:
+
+$$ z(t + \Delta t) = \exp(\Delta t L_H) z(t) $$
+
+Para um Hamiltoniano separável da forma $H(q,p) = T(p) + V(q)$, a linearidade do operador nos permite escrever $L_H = L_T + L_V$. No entanto, como $T$ e $V$ não comutam em geral ($[L_T, L_V] \neq 0$), a exponencial da soma não é a soma das exponenciais. 
+
+A construção de integradores simpléticos baseia-se em aproximações da fórmula de Baker-Campbell-Hausdorff (BCH). A fatoração de primeira ordem (Lie-Trotter) aproxima a evolução por:
+
+$$ \exp(\Delta t (L_T + L_V)) \approx \exp(\Delta t L_T) \exp(\Delta t L_V) $$
+
+A aplicação sequencial de $\exp(\Delta t L_V)$ e $\exp(\Delta t L_T)$ constitui o Método de Euler Simplético. Como cada termo exponencial representa a solução analítica de um Hamiltoniano dependente apenas de $V$ ou de $T$, cada sub-passo é uma transformação canônica exata. A composição de transformações canônicas resulta em uma transformação canônica global, garantindo a simpleticidade do integrador.
+
+Para ordens superiores, utiliza-se a fatoração simétrica (Strang splitting), que fundamenta o método de Verlet (2ª ordem), ou composições fractais de Suzuki-Yoshida, que fundamentam o método de Forest-Ruth (4ª ordem).
+
+## Análise de Erro Inversa (Modified Hamiltonian)
+
+A justificativa analítica para a excelente conservação de energia a longo prazo dos integradores simpléticos é demonstrada através da Análise de Erro Inversa (Backward Error Analysis).
+
+Demonstra-se via álgebra de Lie (fórmula de BCH) que o mapa discreto gerado por um integrador simplético não é uma aproximação de $H$ com decaimento, mas sim **a solução analítica exata de um Hamiltoniano Modificado** (ou Hamiltoniano Sombra) $\tilde{H}$, que pode ser expresso como uma série assintótica:
+
+$$ \tilde{H}(q,p) = H(q,p) + \Delta t \, H_1(q,p) + \Delta t^2 \, H_2(q,p) + \mathcal{O}(\Delta t^3) $$
+
+Desde que o passo $\Delta t$ seja suficientemente pequeno para garantir a estabilidade da aproximação em tempo exponencial, a energia do sistema original $H(q,p)$ varia marginalmente em torno da superfície constante de $\tilde{H}$, limitando o erro global a flutuações oscilatórias finitas e estritamente desprovidas de derivas seculares (drift).

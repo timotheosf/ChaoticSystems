@@ -1,0 +1,51 @@
+/*-- scss:defaults --*/
+
+// Cores de base do documento (retiradas do seu dark.txt)
+$body-bg: #212529;
+$body-color: #dee2e6;
+$link-color: #859bf0;
+$link-hover-color: #9daff3;
+$heading-color: #dee2e6;
+
+// Cores específicas da Sidebar (Barra Lateral) do Quarto
+// Isso vai corrigir a barra branca no dark mode!
+$sidebar-bg: #212529; 
+$sidebar-fg: #dee2e6;
+$sidebar-border: #495057; 
+
+// Cores específicas da Navbar (Barra Superior) do Quarto
+// Usando a cor "bg-body-tertiary" do Zephyr Dark
+$navbar-bg: #2b3035; 
+$navbar-fg: #dee2e6;
+
+// Índice (Table of Contents), blocos de código e inputs
+$toc-color: #adb5bd;
+$code-bg: #343a40;
+$input-bg: #343a40;
+$input-color: #dee2e6;
+
+/*-- scss:rules --*/
+
+// Força a cor do bloco de título (título, autor, instituição) no Quarto
+// 1. Títulos em TODO o documento (agora estão livres do cabeçalho!)
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff !important;
+}
+
+// 2. Cores do bloco de título (nome do autor, afiliação, etc)
+.quarto-title-block, .quarto-title, .quarto-title-meta {
+  color: #dee2e6 !important;
+  
+  .quarto-title-meta-heading {
+    color: #adb5bd !important;
+  }
+}
+
+// Esconde o botão original do Quarto
+.quarto-color-scheme-toggle {
+  display: none !important; 
+}
+.navbar-brand img {
+  max-height: 30px !important; // Ajuste esse número se quiser maior ou menor
+  width: auto;
+}

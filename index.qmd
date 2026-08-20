@@ -1,0 +1,44 @@
+---
+title: Introdução aos Sistemas Caóticos 
+author:
+  - name: Timóteo Fassoni
+    email: timoteo.fassoni@ufv.br
+    affiliations:
+      - name: Instituto de Física do Ibitipoca (IbitiPhys)
+      - name: Grupo de Investigação de Sistemas Complexos (GISC)
+      - name: Universidade Federal de Viçosa (UFV)
+---
+
+<style>
+  .quarto-title-meta-heading {
+    display: none;
+  }
+</style>
+
+
+Este site é um *material de apoio* ao minicurso que elaborei em razão da [VIII Semana Acadêmica da Física](https://seafisufv.netlify.app/), realizado pelo Centro Acadêmico do curso de Física na Universidade Federal de Viçosa (UFV), em 2026. Contudo, ele é autocontido, podendo servir como consulta para outras pessoas.
+
+
+
+<div class="d-flex flex-column align-items-center justify-content-center my-4">
+  <video autoplay loop muted playsinline style="max-width: 100%; height: auto;">
+    <source src="https://assets.tmfss.net/chaosminicurse/ani/trajec_unstable_1.webm" type="video/webm">
+    Seu navegador não suporta a tag de vídeo.
+  </video>
+ <p class="text-muted text-center mt-2" style="max-width: 640px; font-size: 0.9rem;">
+    <strong>O pêndulo duplo:</strong> Um exemplo clássico de caoticidade da mecânica clássica!.
+  </p>
+</div>
+
+
+A principal referência para a elaboração deste minicurso são as notas de aula do prof. Jeremy S. Heyl @DoublePendulumFractal, da University of British Columbia, sobre o fractal do pêndulo duplo. Aqui, seguiremos a seguinte proposta:
+1. Elaborar o problema sobre o Caos na Física;
+2. Introduzir os sistemas do pêndulo simples e do pêndulo duplo;
+3. Introduzir o conceito de Espaço de Fase;
+4. Discutir as sensibilidades às condições inicias com o Mapa de Poincaré e os Expoentes de Lyapunov;
+5. Diferenciar caos de imprevisibilidade;
+6. Aplicar o que aprendemos às órbitas planetárias.
+
+Este material de apoio serve como complemento às discussões apresentadas. As seções aqui presentes desenvolvem os métodos computacionais, aprofundam em tópicos debatidos e abordam outros exemplos de sistemas caóticos. Veja que algumas delas requerem proficiência com cálculo diferencial e integral de muitas variáveis e equações diferenciais.
+
+Direcionamos os alunos interessados ao livro do Strogatz @Strogatz, que desenvolve a maioria destes conceitos de forma muito intuitiva e com pouco requisito de cálculo e equações diferenciais. O livro do Nivaldo Lemos @NivaldoLemos é a principal referência para a parte de Mecânica Clássica; os artigos de Verlet @VerletIntegrator, Forest and Ruth @ForestRuthIntegrator e Molei Tao @TaoIntegrator são a base dos métodos computacionais para estudar estes sistemas. Para aqueles interessados na teoria mais geral de Sistemas Dinâmicos, indicamos o livro de Artur Lopes e Claus Doering @ArturClaus e, a principal referência para uma leitura avançada, o livro de Michel Brin e Garrett Stuck @Brin.

@@ -1,0 +1,14 @@
+---
+title: O problema dos pêndulos
+---
+
+
+
+## Determinando o caos
+
+Podemos pensar que um sistema do pêndulo duplo é caótico se qualquer uma das hastes varre um ângulo que exceda $\pi$ ($-\pi$).
+
+
+![Tempo de *flip* para as condições iniciais $p_1=p_2=0$ e $(\theta_1,\theta_2)\in[-\pi,\pi]^2$.](https://assets.tmfss.net/chaosminicurse/figs/phase_moment_flip.svg){#fig-poincare-sections width="100%" fig-align="center"}
+
+![Expoentes de Lyapunov para as condições inicias $\theta_1=\theta_2=0$ e $\frac{1}{2} (p_1^2 + 2p_2^2 - 2p_1 p_2) - 3=E$.](https://assets.tmfss.net/chaosminicurse/figs/phase_position_flip.svg){#fig-poincare-sections width="100%" fig-align="center"}

@@ -1,0 +1,26 @@
+---
+title: Sensibilidade às condições iniciais
+---
+
+
+<div class="d-flex flex-column align-items-center justify-content-center my-4">
+  <video autoplay loop muted playsinline style="max-width: 100%; height: auto;">
+    <source src="https://assets.tmfss.net/chaosminicurse/ani/trajec_chaos.webm" type="video/webm">
+    Seu navegador não suporta a tag de vídeo.
+  </video>
+ <p class="text-muted text-center mt-2" style="max-width: 640px; font-size: 0.9rem;">
+    <strong>Demonstração da sensibilidade às condições inicias:</strong> os pêndulos saem com condições inicias *quase* iguais, com $\theta_{\text{Verde }1}=\theta_{\text{Azul }1}+10^{-6}$ e $\theta_{\text{Verde }2}=\theta_{\text{Azul }2}$; mesmo assim, suas trajetórias, quase indistinguíveis no início, rapidamente se diferenciam.
+  </p>
+</div>
+
+
+# Expoentes de Lyapunov
+
+![Expoentes de Lyapunov para as condições inicias $p_1=p_2=0$ e $(\theta_1,\theta_2)\in[-\pi,\pi]^2$.](https://assets.tmfss.net/chaosminicurse/figs/phase_moment_lya.svg){#fig-poincare-sections width="100%" fig-align="center"}
+
+![Expoentes de Lyapunov para as condições inicias $\theta_1=\theta_2=0$ e $\frac{1}{2} (p_1^2 + 2p_2^2 - 2p_1 p_2) - 3=E$.](https://assets.tmfss.net/chaosminicurse/figs/phase_position_lya.svg){#fig-poincare-sections width="100%" fig-align="center"}
+
+
+# Seções de Poincaré
+
+![Seções de Poincaré para o pêndulo duplo com valores crescentes de energia. Condições iniciais dadas por $\theta_1=\theta_2=0$ e $E = \frac{1}{2} (p_1^2 + 2p_2^2 - 2p_1 p_2) - 3$.](https://assets.tmfss.net/chaosminicurse/figs/poincare_sections.svg){#fig-poincare-sections width="100%" fig-align="center"}

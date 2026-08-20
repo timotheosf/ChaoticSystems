@@ -1,0 +1,30 @@
+/*-- scss:defaults --*/
+
+// Cores de base do documento (retiradas do seu light.txt)
+$body-bg: #ffffff;
+$body-color: #495057;
+$link-color: #3459e6;
+$link-hover-color: #2a47b8;
+
+// Cores específicas da Sidebar (Barra Lateral) do Quarto
+$sidebar-bg: #ffffff; // Fundo da sidebar
+$sidebar-fg: #495057; // Cor do texto da sidebar
+$sidebar-border: #dee2e6; // Cor da linha divisória
+
+// Cores específicas da Navbar (Barra Superior) do Quarto
+// Usando a cor "bg-body-tertiary" do Zephyr Light
+$navbar-bg: #f8f9fa; 
+$navbar-fg: #495057;
+
+// Índice (Table of Contents) e blocos de código
+$toc-color: #6c757d;
+$code-bg: #f8f9fa;
+
+// Esconde o botão original do Quarto
+.quarto-color-scheme-toggle {
+  display: none !important; 
+}
+.navbar-brand img {
+  max-height: 30px !important; // Ajuste esse número se quiser maior ou menor
+  width: auto;
+}

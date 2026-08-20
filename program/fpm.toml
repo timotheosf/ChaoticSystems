@@ -1,0 +1,29 @@
+name = "ChaosMinicurse"
+version = "0.1.0"
+license = "license"
+author = "timotheosf"
+maintainer = "timoteo.fassoni@ufv.br"
+copyright = "Copyright 2026, timotheosf"
+
+[dependencies]
+SymplecF = { git = "https://github.com/timotheosf/SymplecF" }
+
+[[executable]]
+name = "momentumSpace"
+source-dir = "app"
+main = "momentumSpace.f90"
+
+[[executable]]
+name = "positionSpace"
+source-dir = "app"
+main = "positionSpace.f90"
+
+[[executable]]
+name = "trajectories"
+source-dir = "app"
+main = "trajectories.f90"
+
+[[executable]]
+name = "poincare"
+source-dir = "app"
+main = "poincare.f90"

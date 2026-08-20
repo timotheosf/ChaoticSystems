@@ -1,0 +1,84 @@
+---
+title: Integrador de Forest-Ruth
+---
+
+# Integrador de Forest-Ruth de 4ª Ordem
+
+O integrador de Forest-Ruth (1990) representa um marco no desenvolvimento de métodos numéricos para a mecânica geométrica, estendendo a preservação da estrutura simplética para um esquema de aproximação de 4ª ordem. 
+
+Assim como o método de Verlet, ele é primariamente concebido para Hamiltonianos separáveis da forma $H(q,p) = T(p) + V(q)$. O método fundamenta-se na técnica de composição de operadores introduzida independentemente por Suzuki e Yoshida, onde passos base de integradores simétricos de baixa ordem são concatenados para aniquilar os termos de erro de ordens intermediárias da expansão de Baker-Campbell-Hausdorff (BCH).
+
+## Composição Fractal de Suzuki-Yoshida
+
+Seja $S_2(\tau)$ o operador de evolução associado a um integrador simplético simétrico de 2ª ordem, como o método de Verlet, para um sub-passo temporal $\tau$. A evolução formal do estado do sistema sob $S_2(\tau)$ pode ser expressa em termos do operador de Lie $L_H = \{ \cdot, H \}$:
+
+$$ S_2(\tau) = \exp\left(\tau L_H + \tau^3 E_3 + \tau^5 E_5 + \mathcal{O}(\tau^7)\right) $$
+
+A simetria sob reversão temporal ($t \to -t, \tau \to -\tau$) garante que o operador diferencial equivalente do método numérico possua apenas potências ímpares do passo de tempo em seu erro de truncamento. O termo de erro dominante associado a este método é governado pelo operador diferencial $E_3$.
+
+Para elevar a precisão global para a 4ª ordem, propõe-se uma composição simétrica de três passos sucessivos de $S_2$, escalados por fatores reais fracionários $\theta_1, \theta_2, \theta_3$:
+
+$$ S_4(\Delta t) = S_2(\theta_1 \Delta t) \circ S_2(\theta_2 \Delta t) \circ S_2(\theta_3 \Delta t) $$
+
+Para preservar a simetria temporal da composição, exige-se $\theta_1 = \theta_3 \equiv \theta$. Para que a evolução temporal total avance corretamente por um passo $\Delta t$, a condição de consistência impõe:
+
+$$ 2\theta + \theta_2 = 1 \implies \theta_2 = 1 - 2\theta $$
+
+Substituindo essa composição na série de Lie e utilizando a fórmula BCH iterativamente, o expoente resultante para o mapa global é dado por:
+
+$$ \ln S_4(\Delta t) = \Delta t L_H + \left[ 2\theta^3 + (1 - 2\theta)^3 \right] \Delta t^3 E_3 + \mathcal{O}(\Delta t^5) $$
+
+Para que o método seja de 4ª ordem estrita, o coeficiente do erro de 3ª ordem deve ser idêntico a zero, exigindo a solução algébrica de:
+
+$$ 2\theta^3 + (1 - 2\theta)^3 = 0 $$
+
+A raiz real desta equação cúbica nos fornece a constante fundamental de Forest-Ruth (e Suzuki-Yoshida):
+
+$$ \theta = \frac{1}{2 - 2^{1/3}} \approx 1.35120719195966 $$
+
+Note que o passo intermediário assume um valor estritamente negativo: $\theta_2 = 1 - 2\theta \approx -1.70241438391932$. A existência de um sub-passo retrógrado no tempo é uma necessidade topológica demonstrada para a construção de integradores simpléticos explícitos de ordem maior ou igual a 3.
+
+## O Algoritmo de Forest-Ruth
+
+O algoritmo completo de Forest-Ruth para avançar o estado $(q_n, p_n)$ para $(q_{n+1}, p_{n+1})$ é a execução sequencial do método de Verlet três vezes, utilizando os parâmetros de escala obtidos:
+
+1. **Primeiro Passo (Avanço):** Aplica-se Verlet com incremento $\Delta t_1 = \theta \Delta t$.
+2. **Segundo Passo (Retrógrado):** Aplica-se Verlet a partir do novo estado com incremento $\Delta t_2 = (1 - 2\theta) \Delta t$.
+3. **Terceiro Passo (Avanço Final):** Aplica-se Verlet a partir do estado intermediário com incremento $\Delta t_3 = \theta \Delta t$.
+
+Se cada passo de Verlet for decomposto explicitamente, o algoritmo é frequentemente otimizado combinando as atualizações de momento nas interfaces dos sub-passos, resultando em um esquema computacional otimizado de 4 avaliações do gradiente de força ($\nabla_q V$) por iteração principal.
+
+## Demonstração da Propriedade Simplética
+
+A prova rigorosa da simpleticidade do integrador de Forest-Ruth flui diretamente da estrutura de álgebra de grupos subjacente ao formalismo canônico.
+
+Definimos a matriz Jacobiana total da transformação de um passo de tempo $\Delta t$ do algoritmo de Forest-Ruth como $M_4 = \frac{\partial (q_{n+1}, p_{n+1})}{\partial (q_n, p_n)}$. Como o método é uma composição exata de três mapeamentos do tipo Verlet ($S_2$), a Jacobiana global pela regra da cadeia é o produto das matrizes Jacobianas de cada sub-passo:
+
+$$ M_4 = M_{2,\theta_3} M_{2,\theta_2} M_{2,\theta_1} $$
+
+onde $M_{2,\tau}$ denota a Jacobiana do método de Verlet para um passo genérico $\tau$.
+
+No desenvolvimento prévio da teoria do método de Verlet, foi provado de forma exaustiva que a matriz Jacobiana $M_2$ associada ao passo $S_2$ satisfaz a condição de simpleticidade global:
+
+$$ M_2^T J M_2 = J $$
+
+independentemente do valor, sinal ou magnitude do incremento de tempo adotado. O conjunto das matrizes $2d \times 2d$ que satisfazem esta relação compõe o Grupo Simplético Real, denotado por $Sp(2d, \mathbb{R})$. 
+
+Por definição, um grupo exibe a propriedade de fechamento multiplicativo. Isso implica que o produto de um número arbitrário de matrizes simpléticas resulta, de maneira analiticamente estrita, em uma matriz simplética. Avaliando a relação simplética de $M_4$:
+
+$$ M_4^T J M_4 = (M_{2,\theta_3} M_{2,\theta_2} M_{2,\theta_1})^T J (M_{2,\theta_3} M_{2,\theta_2} M_{2,\theta_1}) $$
+
+Utilizando a propriedade da transposição do produto matricial, $(A B C)^T = C^T B^T A^T$:
+
+$$ M_4^T J M_4 = M_{2,\theta_1}^T M_{2,\theta_2}^T (M_{2,\theta_3}^T J M_{2,\theta_3}) M_{2,\theta_2} M_{2,\theta_1} $$
+
+Aplicando recursivamente a simpleticidade local das matrizes Jacobinas de base ($M_{2,\tau}^T J M_{2,\tau} = J$):
+
+1. O bloco central reduz-se à matriz simplética fundamental:
+   $$ M_4^T J M_4 = M_{2,\theta_1}^T (M_{2,\theta_2}^T J M_{2,\theta_2}) M_{2,\theta_1} $$
+2. O novo bloco central colapsa:
+   $$ M_4^T J M_4 = M_{2,\theta_1}^T J M_{2,\theta_1} $$
+3. A simplificação final encerra a demonstração:
+   $$ M_4^T J M_4 = J $$
+
+Portanto, o integrador de Forest-Ruth preserva exata e incondicionalmente a 2-forma simplética de Poincaré-Cartan, consolidando-se como uma transformação global canônica paramétrica em $\Delta t$.

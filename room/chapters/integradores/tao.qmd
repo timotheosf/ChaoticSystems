@@ -1,0 +1,82 @@
+---
+title: Integrador de Tao
+---
+
+# Integrador de Espaço de Fase Estendido (Tao)
+
+Métodos simpléticos clássicos, como Verlet e Forest-Ruth, baseiam-se fundamentalmente na separabilidade do Hamiltoniano ($H(q,p) = T(p) + V(q)$). Contudo, diversos sistemas físicos de interesse topológico e caótico — como o pêndulo duplo acoplado, a dinâmica de corpos rígidos não-lineares e geodésicas na relatividade geral — exibem Hamiltonianos **inseparáveis**, onde energia cinética e potencial estão intrinsecamente misturadas em uma função arbitrária $H(q,p)$.
+
+A tentativa de aplicar técnicas convencionais de *splitting* a sistemas inseparáveis resulta em esquemas numéricos implícitos, cujas soluções iterativas (como Newton-Raphson) destroem a exatidão da simpleticidade à precisão de máquina. Para solucionar este paradigma de forma puramente explícita, Molei Tao (2016) introduziu o método do Espaço de Fase Estendido.
+
+## A Extensão do Espaço e a Solução do Sistema Real
+
+A formulação geométrica do método baseia-se em duplicar os graus de liberdade do sistema. Ao vetor de estado físico original $z = (q,p)^T \in \mathbb{R}^{2d}$, acopla-se um vetor de estado auxiliar $w = (x,y)^T \in \mathbb{R}^{2d}$. O espaço de fase estendido assume dimensão $4d$, com coordenadas $\zeta = (q,p,x,y)^T$.
+
+Postula-se um novo Hamiltoniano Estendido, $\bar{H}$, definido de tal modo que o acoplamento entre $q$ e $p$ seja rompido ao cruzar as variáveis físicas com as auxiliares:
+
+$$ \bar{H}(q,p,x,y) = H(q,y) + H(x,p) + \frac{\omega}{2} \left( \|q-x\|^2 + \|p-y\|^2 \right) $$
+
+onde $\omega > 0$ é uma constante de acoplamento artificial que atua como um potencial harmônico penalizador. 
+
+### A Invariância e Conexão Física
+O triunfo analítico deste Hamiltoniano estendido revela-se ao obtermos suas equações de movimento no espaço $4d$:
+
+$$ \dot{q} = \nabla_p \bar{H} = \nabla_p H(x,p) + \omega(p-y) $$
+$$ \dot{p} = -\nabla_q \bar{H} = -\nabla_q H(q,y) - \omega(q-x) $$
+$$ \dot{x} = \nabla_y \bar{H} = \nabla_y H(q,y) - \omega(p-y) $$
+$$ \dot{y} = -\nabla_x \bar{H} = -\nabla_x H(x,p) + \omega(q-x) $$
+
+Considere o subespaço denotado pela variedade de sincronização $\mathcal{M} = \{ (q,p,x,y) \in \mathbb{R}^{4d} \mid q = x, \, p = y \}$. Se o sistema é inicializado nesta variedade (isto é, as variáveis auxiliares recebem as condições iniciais exatas do sistema real), substituímos $x=q$ e $y=p$ nas equações contínuas e obtemos:
+
+$$ \dot{q} = \nabla_p H(q,p) \quad \text{e} \quad \dot{p} = -\nabla_q H(q,p) $$
+$$ \dot{x} = \dot{q} \quad \text{e} \quad \dot{y} = \dot{p} $$
+
+Isto prova rigorosamente que **a variedade $\mathcal{M}$ é invariante sob o fluxo contínuo de $\bar{H}$**. Mais importante: restrita à variedade $\mathcal{M}$, a evolução das coordenadas $(q,p)$ sob o Hamiltoniano Estendido $\bar{H}$ **soluciona de forma exata e idêntica as equações originais de Hamilton para o sistema físico real $H(q,p)$**. O termo harmônico $\omega$ opera estritamente para suprimir o afastamento numérico da variedade $\mathcal{M}$ devido aos erros de truncamento.
+
+## O Algoritmo de Splitting Explícito
+
+O Hamiltoniano Estendido $\bar{H}$ é então particionado em três sub-Hamiltonianos analiticamente tratáveis, $\bar{H} = H_A + H_B + H_C$:
+
+1. $H_A = H(q,y)$
+2. $H_B = H(x,p)$
+3. $H_C = \frac{\omega}{2} \left( \|q-x\|^2 + \|p-y\|^2 \right)$
+
+A notável propriedade desta partição é que os operadores diferenciais correspondentes podem ser integrados analiticamente de modo puramente explícito para um passo $\Delta t$:
+
+**Sub-passo A (Evolução sob $H_A$):**
+Como $H_A$ não depende de $p$ nem de $x$, tais coordenadas permanecem congeladas. O avanço é linear:
+$$ p \leftarrow p - \Delta t \nabla_q H(q, y) $$
+$$ x \leftarrow x + \Delta t \nabla_y H(q, y) $$
+
+**Sub-passo B (Evolução sob $H_B$):**
+Analogamente, $H_B$ não depende de $q$ nem de $y$, que restam congelados:
+$$ q \leftarrow q + \Delta t \nabla_p H(x, p) $$
+$$ y \leftarrow y - \Delta t \nabla_x H(x, p) $$
+
+**Sub-passo C (Mistura dos Osciladores sob $H_C$):**
+A dinâmica sob o termo de acoplamento descreve osciladores harmônicos emparelhados em $(q-x)$ e $(p-y)$. A solução analítica da integração é a rotação exata da base vetorial do erro. Definindo $c = \cos(2\omega \Delta t)$ e $s = \sin(2\omega \Delta t)$:
+$$ v_1 = c(q-x) + s(p-y) $$
+$$ v_2 = -s(q-x) + c(p-y) $$
+Os estados atualizam-se geometricamente por:
+$$ q \leftarrow \frac{q+x+v_1}{2}, \quad p \leftarrow \frac{p+y+v_2}{2} $$
+$$ x \leftarrow \frac{q+x-v_1}{2}, \quad y \leftarrow \frac{p+y-v_2}{2} $$
+
+A composição simétrica desses passos ($A \to B \to C \to B \to A$ com frações de tempo correspondentes) estabelece um integrador de 2ª ordem explícito. Tal esquema básico é submetido à composição fractal de Suzuki-Yoshida para atingir a 4ª ordem, análoga ao tratamento empregado no método de Forest-Ruth.
+
+## Demonstração da Propriedade Simplética
+
+Para validar o método de Tao como um integrador simplético estrito, devemos expandir a noção de forma simplética para o espaço de fase $4d$. A 2-forma de Poincaré-Cartan estendida é dada por $\bar{\omega} = dq \wedge dp + dx \wedge dy$. 
+
+A estrutura algébrica correspondente ao espaço $4d$ exige que a matriz Jacobiana $\bar{M}$ do mapeamento numérico preserve a matriz simplética em blocos $\bar{J}$:
+$$ \bar{J} = \begin{pmatrix} J & 0 \\ 0 & J \end{pmatrix} = \begin{pmatrix} 0 & I & 0 & 0 \\ -I & 0 & 0 & 0 \\ 0 & 0 & 0 & I \\ 0 & 0 & -I & 0 \end{pmatrix} $$
+A condição fundamental torna-se $\bar{M}^T \bar{J} \bar{M} = \bar{J}$.
+
+A demonstração decorre do fato físico de que **cada um dos sub-passos do algoritmo (A, B e C) não é uma aproximação de Taylor, mas sim o fluxo de fase analítico (exato) correspondente a um Hamiltoniano bem definido** ($H_A$, $H_B$ e $H_C$).
+
+É um teorema central da mecânica hamiltoniana que o fluxo analítico gerado por qualquer Hamiltoniano suave é uma transformação canônica exata em seu respectivo espaço de fase. Desta forma, as matrizes Jacobianas individuais $M_A$, $M_B$ e $M_C$ derivadas analiticamente dos sub-passos pertencem, intrinsecamente, ao grupo simplético estendido $Sp(4d, \mathbb{R})$:
+$$ M_A^T \bar{J} M_A = \bar{J}, \quad M_B^T \bar{J} M_B = \bar{J}, \quad M_C^T \bar{J} M_C = \bar{J} $$
+
+Como a matriz Jacobiana total do integrador básico de 2ª ordem é o produto dessas matrizes ($\bar{M}_2 = M_A M_B M_C M_B M_A$), o fechamento algébrico do grupo simplético garante recursivamente que:
+$$ \bar{M}_2^T \bar{J} \bar{M}_2 = \bar{J} $$
+
+Conclui-se que o mapa estendido do método de Tao é rigorosamente simplético no espaço auxiliar de dimensão superior $4d$. Esta simpleticidade estrutural do sistema embutido impõe restrições severas sobre a evolução do Hamiltoniano Modificado correspondente, mitigando drifts seculares de energia, garantindo assim que a dinâmica restrita adjacente à variedade subjacente $\mathcal{M}$ (a física do nosso sistema não-separável original) preserve as feições topológicas requeridas por longas integrações de sistemas caóticos.

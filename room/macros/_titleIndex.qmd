@@ -1,0 +1,105 @@
+## {background-image="https://www.popsci.com/wp-content/uploads/2024/04/03/chaotic-galaxy.jpg?quality=85"}
+:::{.boxing}
+<div class="linha-gradiente"> </div>
+<div class="subtitulo">SEAFIS - MINICURSO</div>
+<h1 class="titulo-principal">Introdução aos<br> Sistemas Caóticos</h1>
+<p style="color: #8c9baf; font-size: 1.2em;">Timóteo Fassoni</p>
+<div style="display: flex; justify-content: flex-end;">
+<div class="caixa-logos">
+  <img src="https://assets.tmfss.net/logos/IbitiLogoBlue.svg" alt="IbitiPhys">
+  <img src="https://assets.tmfss.net/logos/gisc/dark.svg" alt="GISC">
+  <img src="https://assets.tmfss.net/logos/ufv/white.png" alt="UFV">
+</div>
+</div>
+:::
+
+## {background-image="https://www.popsci.com/wp-content/uploads/2024/04/03/chaotic-galaxy.jpg?quality=85"}
+:::: {.boxing}
+<div class="linha-gradiente"> </div>
+<div class="subtitulo">Conteúdo</div>
+<h2 style="font-size: 1.2em;">Acesse o conteúdo do curso</h2>
+
+:::: {.columns}
+
+::: {.column width="68%"}
+<iframe src="https://chaosminicurse.tmfss.net/" width="100%" height="500px" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 10px;"></iframe>
+:::
+
+::: {.column width="28%"}
+<div style="display: grid; align-items: center; height: 500px;">
+<img src="https://assets.tmfss.net/chaosminicurse/qr-code-site.svg">
+</div>
+:::
+::::
+::::
+
+## [Conteúdo]{.title-sec} Índice geral
+::::: {.indice-grid}
+
+:::: {.indice-card .fragment fragment-index=1}
+
+[01]{.numero}
+
+::: {.textos}
+**Caos e Física**  
+[O problema de definir Complexidade na Física]{.desc}
+:::
+
+::::
+
+:::: {.indice-card .fragment fragment-index=4}
+
+[04]{.numero}
+
+::: {.textos}
+**Fronteira do Caos**  
+[Sensibilidade às condições iniciais, expoentes de Lyapunov e seções de Poincaré.]{.desc}
+:::
+
+::::
+
+:::: {.indice-card .fragment fragment-index=2}
+
+[02]{.numero}
+
+::: {.textos}
+**O problema dos pêndulos**  
+[O pêndulo simples e o pêndulo duplo.]{.desc}
+:::
+
+::::
+
+:::: {.indice-card .fragment fragment-index=5}
+
+[05]{.numero}
+
+::: {.textos}
+**Órbitas Planetárias**  
+[Gravitação, estabilidade e caos.]{.desc}
+:::
+
+::::
+
+:::: {.indice-card .fragment fragment-index=3}
+
+[03]{.numero}
+
+::: {.textos}
+**Espaço de Fase**  
+[Sistemas meteorológicos, criptografia e dinâmicas populacionais complexas.]{.desc}
+:::
+
+::::
+
+:::: {.indice-card .fragment fragment-index=6}
+
+[06]{.numero}
+
+::: {.textos}
+**Conclusão**  
+[Por que estudar caos na física?]{.desc}
+:::
+
+::::
+
+:::::

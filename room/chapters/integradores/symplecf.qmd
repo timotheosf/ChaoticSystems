@@ -1,0 +1,40 @@
+---
+title: SymplecF
+---
+
+# A Biblioteca SymplecF
+
+Para focar na Física e não na implementação complexa das equações fracionárias dos integradores simpléticos, desenvolvemos para este minicurso a biblioteca em Fortran **SymplecF** (desenvolvida no Instituto de Física do Ibitipoca - IbitiPhys).
+
+Ela permite a simulação de sistemas hamiltonianos separáveis (via Forest-Ruth) e inseparáveis (via integrador de Tao).
+
+## Como utilizar
+
+A arquitetura orientada a objetos separa a definição da física (`system_t`) da matemática de integração (`integrator_t`). Veja um exemplo básico de como resolver um sistema caótico:
+
+```fortran
+program main
+    use symplecf_kinds_mod
+    use symplecf_system_mod
+    use symplecf_tao_mod  ! O integrador para pêndulo duplo
+    
+    implicit none
+    
+    type(system_t), target :: sys
+    type(tao4_t)           :: integrator
+    
+    ! 1. Inicializa o sistema com condições iniciais e as derivadas parciais
+    call sys%new(init_q=[0.1_dp], init_p=[0.0_dp], drift_q=meu_dq, drift_p=meu_dp)
+    
+    ! 2. Acopla o integrador ao sistema (passo = 0.05, OMEGA = 10.0)
+    call integrator%init(sys, step_size=0.05_dp, coupling_omega=10.0_dp)
+    
+    ! 3. Roda a simulação no tempo
+    do step = 1, 1000
+        call integrator%step()
+        ! Aqui podemos salvar as variáveis sys%q e sys%p para os diagramas de fase
+    end do
+    
+    ! 4. Limpa a memória
+    call sys%kill()
+end program main

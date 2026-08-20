@@ -1,0 +1,167 @@
+\synctex=0
+\documentclass[tikz]{standalone}
+\usetikzlibrary{arrows.meta, positioning}
+\usetikzlibrary{decorations.pathmorphing, decorations.pathreplacing, decorations.shapes}
+
+\definecolor{dodgerblue}{HTML}{1E90FF}
+\definecolor{gray}{HTML}{708090}
+
+\newcommand{\DrawOrder}{
+    \fill[dodgerblue] (0,0) circle (0.6);
+}
+\newcommand{\DrawDisorder}{
+    \fill[dodgerblue,opacity=0.3] (-\halfL,-\halfL) rectangle (\halfL,\halfL);
+}
+\newcommand{\DrawComplexity}{
+    %\clip (-\halfL,-\halfL) rectangle (\halfL,\halfL);
+
+        % Fixamos a semente para manter o mesmo padrão gerado toda vez
+        \pgfmathsetseed{137}
+
+        % Varredura numa grade fina (que será "bagunçada" depois)
+        \foreach \x in {-28,...,28} {
+            \foreach \y in {-28,...,28} {
+                % Posição base na grade (espaçamento de 0.06)
+                \pgfmathsetmacro{\px}{\x*0.06}
+                \pgfmathsetmacro{\py}{\y*0.06}
+                
+                % Coordenadas polares (+0.001 para evitar erro de divisão por zero no centro)
+                \pgfmathsetmacro{\theta}{atan2(\py+0.001, \px+0.001)}
+                \pgfmathsetmacro{\r}{sqrt(\px*\px + \py*\py)}
+                
+                % --- MATEMÁTICA DO CAOS E COMPLEXIDADE ---
+                
+                % 1. O estiramento (Advecção): Cria braços espirais
+                % 800 é a taxa de torção. Quanto maior, mais enrolada a espiral.
+                \pgfmathsetmacro{\spiral}{cos(\theta - 1000*\r)}
+                
+                % 2. O dobramento (Perturbação): Quebra a espiral em ilhas e filamentos
+                \pgfmathsetmacro{\perturb}{0.5*sin(500*\px)*cos(500*\py)}
+                
+                % 3. A memória do estado inicial: Mantém o centro mais concentrado (círculo)
+                \pgfmathsetmacro{\cboost}{\r < \halfL*1.1 ? 2.5*exp(-5*\r*\r) : 0}
+                
+                % Equação agregada: Ordem (centro+espiral) + Caos (perturbação+ruído)
+                \pgfmathsetmacro{\val}{\spiral + \perturb + 0.8*rand + \cboost}
+                
+                % Limiar da transição: se o valor for maior que 0.4, existe corante ali
+                \pgfmathparse{\val > 0.3 ? 1 : 0}
+                \ifnum\pgfmathresult=1
+                    % Adiciona um "jitter" (tremor) para destruir o padrão de grade perfeito
+                    \pgfmathsetmacro{\jx}{\px + 0.025*rand}
+                    \pgfmathsetmacro{\jy}{\py + 0.025*rand}
+                    
+                    % Varia o raio da bolinha para dar um aspecto orgânico de gotículas
+                    \pgfmathsetmacro{\rad}{0.03 + 0.05*abs(rand)}
+                    
+                    \fill[dodgerblue,opacity=rnd] (\jx, \jy) circle (\rad);
+                \fi
+            }
+        }
+}
+
+\newcommand{\DefineCoordinates}{
+    \def\halfL{1.8}
+    \useasboundingbox (-0.1,-4.1) rectangle (14.4,4.1);
+    \coordinate(S0) at (0,0.5);
+    \coordinate(S1) at (2.2,0.7);
+    \coordinate(S2) at (12.9,3.5);
+    \coordinate(S3) at (13.9,3.5);
+}
+\newcommand{\EntropyCurve}{
+    \draw[dodgerblue,very thick,line cap=round,line join=round]
+        (S0)
+            --
+        (S1)
+            to[out=5, in=180]
+        (S2)
+            --
+        (S3);
+}
+
+\newcommand{\DrawAxis}{
+    \draw[-{Triangle[length=0.5em, width=0.4em]}, thick, gray] (0,0) -- (0,4);
+    \draw[-{Triangle[length=0.5em, width=0.4em]}, thick, gray] (0,0) -- (14,0);
+    \node[anchor=west, gray] at (0,3.5) {Entropia, $\mathcal{S}$};
+    \node[anchor=east, gray] at (14.3,0) {$t$};
+}
+
+\newcommand{\SystemOrder}{
+    \draw[-{Triangle[length=0.5em, width=0.4em]}, gray] (2,1.7) -- (2,0.7);
+    \node[anchor=south,align=center, gray] at (2,1.7) {Sistema organizado\\ Entropia mínima};
+}
+\newcommand{\SystemDisorder}{
+    \draw[-{Triangle[length=0.5em, width=0.4em]}, gray] (12,2.4) -- (12,3.4);
+    \node[anchor=north,align=center, gray] at (12,2.4) {Sistema totalmente\\ desordenado\\Entropia máxima};
+}
+\newcommand{\SystemComplexity}{
+    \draw[-{Triangle[length=0.5em, width=0.4em]}, gray] (5,0.4135*5-1.2) -- (9,0.4135*9-1.2);
+    \node[gray,anchor=south] at (7,0.4135*9-0.9) {Aumento da desordem};
+}
+
+\NewDocumentCommand{\CommentOverAxis}{O{2} O{Comentário} O{4} }{
+    \draw[decorate,decoration=brace, thick,gray]
+        (#1+0.5*#3-0.1,-0.2) -- (#1-0.5*#3+0.1,-0.2);
+    \node[anchor=south,yshift=+0.8em,align=center, gray] at (#1,-0.2) {#2};
+}
+
+\NewDocumentCommand{\DrawBox}{O{}m}{
+    \begin{scope}[shift={(#2,-0.4-\halfL)}]
+        \fill[gray,opacity=0.2] (-\halfL,-\halfL) rectangle (\halfL,\halfL);
+        #1
+        \draw[gray, very thick] (-\halfL,-\halfL) rectangle (\halfL,\halfL);
+    \end{scope}
+}
+\begin{document}
+
+\begin{tikzpicture}    
+    \DefineCoordinates
+    \DrawBox[\DrawOrder]{2}
+\end{tikzpicture}
+
+\begin{tikzpicture}    
+    \DefineCoordinates
+    \DrawAxis
+    \CommentOverAxis[2][Ordem]
+\end{tikzpicture}
+
+\begin{tikzpicture}    
+    \DefineCoordinates
+    \CommentOverAxis[12][Desordem]
+    \DrawBox[\DrawDisorder]{12}
+\end{tikzpicture}
+
+
+\begin{tikzpicture}    
+    \DefineCoordinates
+    \EntropyCurve
+\end{tikzpicture}
+
+\begin{tikzpicture}    
+    \DefineCoordinates
+    \SystemOrder
+\end{tikzpicture}
+
+\begin{tikzpicture}    
+    \DefineCoordinates
+    \SystemDisorder
+\end{tikzpicture}
+
+\begin{tikzpicture}    
+    \DefineCoordinates
+    \SystemComplexity
+\end{tikzpicture}
+
+\begin{tikzpicture}    
+    \DefineCoordinates
+    \DrawBox[\DrawComplexity]{7}%\DrawComplexity
+\end{tikzpicture}
+
+
+
+\begin{tikzpicture}    
+    \DefineCoordinates
+    \CommentOverAxis[7][Complexidade?][6]
+\end{tikzpicture}
+
+\end{document}

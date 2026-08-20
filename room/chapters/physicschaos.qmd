@@ -1,0 +1,10 @@
+---
+title: Caos e Física
+---
+
+## O problema
+
+Quando falamos sobre o **problema do caos** na Física, nos referimos sobre a grande dificuldade em definir *o que é caos*. Sabemos lidar bem com sistemas de partículas únicas e com sistemas totalmente desordenados (limite termodinâmico), mas e aqueles sistemas que ficam entre estes dois extremos?
+
+
+![O problema da complexidade: sistemas com entropia mínima evoluem para um estado de entropia máxima; no primeiro, é um caso estático, como o momento em que uma gota de corante toca a água num copo; no segundo, o corante já terá se espalhado completamente no volume de água. Mas e entre estes dois estados, o que há?](https://assets.tmfss.net/chaosminicurse/figs/complex.svg){#fig-poincare-sections width="100%" fig-align="center"}
