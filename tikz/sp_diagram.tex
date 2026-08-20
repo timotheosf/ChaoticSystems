@@ -1,0 +1,85 @@
+\synctex=0
+\documentclass[tikz]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{intersections, fadings, calc, arrows.meta}
+
+% --- CORES ---
+\definecolor{blue}{HTML}{1e90ff}   
+\definecolor{crimson}{HTML}{DC143C}    
+\definecolor{green}{HTML}{228B22}  
+\definecolor{grey}{HTML}{708090} % Ponto fixo
+
+% --- 1. COORDENADAS E BOUNDING BOX ---
+\newcommand{\DefineCoordinates}{
+    % Usando o mesmo bounding box do duplo para garantir mesma escala nos slides
+    \useasboundingbox (-4,-7) rectangle (4,1.5);
+    \coordinate (O) at (0,0);
+    % Pêndulo a 30 graus da vertical (mesmo comprimento = 3)
+    \coordinate (M) at (-60:3); 
+}
+
+% --- 2. ESTRUTURA (Teto, Haste e Massa) ---
+\newcommand{\DrawStructure}{
+    % Haste
+    \draw[blue, line width=1.5] (O) -- (M);
+    
+    % Teto/Origem
+    \node[circle, fill=blue, minimum size=8, inner sep=0pt] (center) at (O) {};
+    \fill[blue!20] (-0.8,0) rectangle (0.8, 0.2); 
+    \draw[blue, thick] (-0.8,0) -- (0.8,0);
+    
+    % Massa
+    \node[circle, fill=blue, minimum size=12, inner sep=0pt, label={[text=grey, right=0.2cm]$m$}] (mass) at (M) {};
+}
+
+% --- 3. ÂNGULOS (Referencial e Arco) ---
+\newcommand{\DrawAngles}{
+    % Referencial vertical tracejado
+    \draw[dashed, grey, thick] (O) ++(0, 0) -- ++(0,-3.5);
+    
+    % Arco e Texto
+    \draw[crimson, thick, ->] (0,-1.5) arc (-90:-60:1.5) node[midway, below right=1pt] {$\theta$};
+}
+
+% --- 4. GRAVIDADE (Peso) ---
+\newcommand{\DrawGravity}{
+    \draw[crimson, thick, -latex, line width=1.2] (M) -- ++(0,-1.6) node[right] {$m\vec{g}$};
+}
+
+% --- 5. TENSÃO (Tração) ---
+\newcommand{\DrawTension}{
+    % A tração aponta para o teto (oposto a -60 é +120)
+    \draw[green, thick, -latex, line width=1.2] (M) -- ++(120:1.2) node[above right] {$\vec{T}$};
+}
+
+\begin{document}
+
+% FRAME 1: Apenas Estrutura
+\begin{tikzpicture}
+    \DefineCoordinates
+    \DrawStructure
+\end{tikzpicture}
+
+% FRAME 2: Estrutura + Ângulo
+\begin{tikzpicture}
+    \DefineCoordinates
+    
+    \DrawAngles
+\end{tikzpicture}
+
+% FRAME 3: Estrutura + Ângulo + Gravidade
+\begin{tikzpicture}
+    \DefineCoordinates
+    
+    \DrawGravity
+\end{tikzpicture}
+
+% FRAME 4: Completo (Estrutura + Ângulo + Gravidade + Tensão)
+\begin{tikzpicture}
+    \DefineCoordinates
+    
+    \DrawTension
+\end{tikzpicture}
+
+\end{document}

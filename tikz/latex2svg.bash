@@ -29,8 +29,8 @@ cleanWorkspace() {
 }
 
 FILE="$1"
-INPUT_DIR="media/tikz"
-OUTPUT_DIR="media/figs"
+INPUT_DIR="tikz/"
+OUTPUT_DIR="tikz/"
 LATEXMK_DIR="build"
 
 readarray -t files2compile < <(ls $INPUT_DIR/*.tex)

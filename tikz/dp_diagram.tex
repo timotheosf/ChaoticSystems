@@ -1,0 +1,90 @@
+\synctex=0
+\documentclass[tikz]{standalone}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{intersections, fadings, calc, arrows.meta}
+
+% --- CORES ---
+\definecolor{blue}{HTML}{1e90ff}   
+\definecolor{crimson}{HTML}{DC143C}    
+\definecolor{green}{HTML}{228B22}  
+\definecolor{grey}{HTML}{708090} % Ponto fixo
+
+% --- 1. COORDENADAS E BOUNDING BOX ---
+\newcommand{\DefineCoordinates}{
+    \useasboundingbox (-4,-7) rectangle (4,1.5);
+    \coordinate (O) at (0,0);
+    \coordinate (M1) at (-30-90:3);
+    \coordinate (M2) at ($(M1) + (-30:3)$);
+}
+
+% --- 2. ESTRUTURA (Teto, Hastes e Massas) ---
+\newcommand{\DrawStructure}{
+    % Hastes
+    \draw[blue, line width=1.5] (O) -- (M1);
+    \draw[blue, line width=1.5] (M1) -- (M2);
+    
+    % Teto/Origem
+    \node[circle, fill=blue, minimum size=8, inner sep=0pt] (center) at (O) {};
+    \fill[blue!20] (-0.8,0) rectangle (0.8, 0.2); 
+    \draw[blue, thick] (-0.8,0) -- (0.8,0);
+    
+    % Massas
+    \node[circle, fill=blue, minimum size=12, inner sep=0pt, label={[text=grey, xshift=-0.5cm, yshift=0.1cm]$m_1$}] (mass1) at (M1) {};
+    \node[circle, fill=blue, minimum size=12, inner sep=0pt, label={[text=grey, right=0.2cm]$m_2$}] (mass2) at (M2) {};
+}
+
+% --- 3. ÂNGULOS (Referenciais e Arcos) ---
+\newcommand{\DrawAngles}{
+    % Referenciais verticais tracejados
+    \draw[dashed, grey, thick] (O) ++(0, 0) -- ++(0,-2.5);
+    \draw[dashed, grey, thick] (M1) ++(0, 0) -- ++(0,-2.5);
+    
+    % Arcos e Textos
+    \draw[crimson, thick, ->] (0,-1.5) arc (-90:-120:1.5) node[midway, below] {$\theta_1$};
+    \draw[crimson, thick, ->] ($(M1) + (0,-1.2)$) arc (-90:-30:1.2) node[midway, below right] {$\theta_2$};
+}
+
+% --- 4. GRAVIDADE (Pesos) ---
+\newcommand{\DrawGravity}{
+    \draw[crimson, thick, -latex, line width=1.2] (M1) -- ++(0,-1.6) node[left] {$m_1\vec{g}$};
+    \draw[crimson, thick, -latex, line width=1.2] (M2) -- ++(0,-1.6) node[right] {$m_2\vec{g}$};
+}
+
+% --- 5. TENSÕES (Trações) ---
+\newcommand{\DrawTensions}{
+    \draw[green, thick, -latex, line width=1.2] (M1) -- ++(60:0.9) node[above left] {$\vec{T}_1$};
+    \draw[green, thick, -latex, line width=1.2] (M1) -- ++(-30:0.9) node[above right] {$\vec{T}_2$};
+    \draw[green, thick, -latex, line width=1.2] (M2) -- ++(150:0.9) node[above right] {$\vec{T}^{\prime}_2$};
+}
+
+\begin{document}
+
+% FRAME 1: Apenas Estrutura
+\begin{tikzpicture}
+    \DefineCoordinates
+    \DrawStructure
+\end{tikzpicture}
+
+% FRAME 2: Estrutura + Ângulos
+\begin{tikzpicture}
+    \DefineCoordinates
+    
+    \DrawAngles
+\end{tikzpicture}
+
+% FRAME 3: Estrutura + Ângulos + Gravidade
+\begin{tikzpicture}
+    \DefineCoordinates
+    
+    \DrawGravity
+\end{tikzpicture}
+
+% FRAME 4: Completo (Estrutura + Ângulos + Gravidade + Tensões)
+\begin{tikzpicture}
+    \DefineCoordinates
+    
+    \DrawTensions
+\end{tikzpicture}
+
+\end{document}
