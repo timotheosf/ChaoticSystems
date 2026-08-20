@@ -16,6 +16,31 @@ shortcodes:
 
 ## [Caos e Física]{.title-sec}
 
+[**A questão central:** Como podemos *definir* o que é **Caos**?]{.fragment}
+
+::::{style="display: flex; justify-content: space-around; align-items: center;"}
+
+::: {.incremental}
+- O que vocês entendem quando dizemos a palavra caos?
+- O que vocês *acham* que é um sistema caótico?
+- Qual a diferença entre *caos* e *desordem*?
+- Qual a diferença entre *caos* e *imprevisibilidade*?
+- Qual a diferença entre *caos* e *complexidade*?
+:::
+::::
+
+## [Caos e Física]{.title-sec}
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 50vh; text-align: center;"}
+
+[Os conceitos-chave aqui:]{.fragment style="font-size: 1.5em; margin-bottom: 20px;"}
+
+[**Complexidade** e **Caos**]{.fragment style="font-size: 1.5em;"}
+
+[Vamos fazer um experimento mental...]{.fragment}
+:::
+
+## [Caos e Física]{.title-sec}
+
 ::: {style="display: flex; justify-content: space-around; align-items: center;"}
 ![](https://assets.tmfss.net/chaosminicurse/figs/complex_wide_1.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
 ![](https://assets.tmfss.net/chaosminicurse/figs/complex_wide_2.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
@@ -28,25 +53,135 @@ shortcodes:
 ![](https://assets.tmfss.net/chaosminicurse/figs/complex_wide_9.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
 :::
 
+## [Caos e Física]{.title-sec}
+
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 50vh; text-align: center;"}
+
+[Vamos atrás de uma resposta a partir do estudo de pêndulos...]{style="font-size: 1.5em; margin-bottom: 20px;"}
+
+:::
+
 ##
 {{< MakeChapter
   numbering="02"
   titulo="Pêndulos"
   desc="Os problemas do pêndulo simples e do pêndulo duplo."
-  img=""
+  img="https://upload.wikimedia.org/wikipedia/commons/1/17/Chaos_Theory_%26_Double_Pendulum_-_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original"
 >}}
 
+## [O Pêndulo Simples]{.title-sec}
+
+::: {style="display: flex; justify-content: space-around; align-items: center;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/sp_diagram_1.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/sp_diagram_2.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/sp_diagram_3.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/sp_diagram_4.svg){.fragment width="100%" .absolute top=120 left=0 right=0 style="margin: auto;"}
+[$$E = \frac{1}{2} m v^2 + mgL(1-\cos\theta)$$]{.fragment}
+:::
+
+## 
+
+::: {style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 50vh; text-align: center;"}
+$$E = \frac{1}{2} m v^2 + mgL(1-\cos\theta)$$
+:::
+
+## [O Pêndulo Simples]{.title-sec}
+
+{{< InsertVideo 
+  PATH="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_pequeno.webm"
+  type="Pêndulo simples:"
+  desc="Condições iniciais $\theta=17^\circ$, $v=0$."
+>}}
+
+## [O Pêndulo Simples]{.title-sec}
+{{< InsertVideo 
+  PATH="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_medio.webm"
+  type="Pêndulo simples:"
+  desc="Condições iniciais $\theta=90^\circ$, $v=0$."
+>}}
+
+## [O Pêndulo Simples]{.title-sec}
+{{< InsertVideo 
+  PATH="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_extremo.webm"
+  type="Pêndulo simples:"
+  desc="Condições iniciais $\theta=170^\circ$, $v=0$."
+>}}
+
+## [O Pêndulo Simples]{.title-sec}
+{{< InsertColumn3
+    src1="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_pequeno.webm"
+    desc1="Pêndulo, $\theta=17^\circ$"
+    src2="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_medio.webm"
+    desc2="Pêndulo, $\theta=90^\circ$"
+    src3="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_extremo.webm"
+    desc3="Pêndulo, $\theta=170^\circ$"
+>}}
+[Mas e se darmos mais energia inicial aos nossos pêndulos?]{.fragment}
+
+## [O Pêndulo Simples]{.title-sec}
+Vamos lembrar,
+[$$E = T + V$$]{.fragment}
+[$$V=:\, \text{Energia potencial!}$$]{.fragment}
+[$$T=:\, \text{Energia cinética!}$$]{.fragment}
+[$$T=\frac{1}{2}mv^2$$]{.fragment}
+[Vamos soltar o pêndulo com alguma velocidade inicial!]{.fragment}
+
+## [O Pêndulo Simples]{.title-sec}
+
+Vamos explorar a ideia...
+{{< InsertColumn3
+    src1="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_increment_vel_1.webm"
+    desc1="Pêndulo, $\theta=20^\circ, v=2$m/s"
+    src2="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_increment_vel_2.webm"
+    desc2="Pêndulo, $\theta=20^\circ, v=5$m/s"
+    src3="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_increment_vel_3.webm"
+    desc3="Pêndulo, $\theta=20^\circ, v=8$m/s"
+>}}
+
+## [O Pêndulo Simples]{.title-sec}
+{{< InsertColumn3
+    src1="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_pequeno_fast.webm"
+    desc1="Pêndulo, $\theta=17^\circ, v=8$m/s"
+    src2="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_medio_fast.webm"
+    desc2="Pêndulo, $\theta=90^\circ, v=8$m/s"
+    src3="https://assets.tmfss.net/chaosminicurse/ani/trajec_simple_extremo_fast.webm"
+    desc3="Pêndulo, $\theta=170^\circ, v=8$m/s"
+>}}
+
+## [O que aprendemos?]{.title-sec}
 
 
 ## [O Pêndulo Duplo]{.title-sec}
 
-<video data-autoplay muted loop playsinline width="100%">
+:::: {style="position: relative; height: 90vh;"}
+
+<!-- A equação fica presa no topo (top=20) -->
+::: {.fragment .absolute top=-50 left=0 right=0 style="font-size: 50%;" }
+$$
+\begin{aligned}
+E &= \frac{1}{2} m_1 v_1^2 + \frac{1}{2} m_2v_2^2 + 2 v_1v_2\cos(\theta_1 - \theta_2) \\
+  &\quad - (m_1 + m_2) g l_1 \cos\theta_1 - m_2 g l_2 \cos\theta_2
+\end{aligned}
+$$
+:::
+
+<!-- As imagens foram empurradas mais para baixo (top=220) para não bater na equação -->
+![](https://assets.tmfss.net/chaosminicurse/figs/dp_diagram_1.svg){.fragment width="90%" .absolute top=-70 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/dp_diagram_2.svg){.fragment width="90%" .absolute top=-70 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/dp_diagram_3.svg){.fragment width="90%" .absolute top=-70 left=0 right=0 style="margin: auto;"}
+![](https://assets.tmfss.net/chaosminicurse/figs/dp_diagram_4.svg){.fragment width="90%" .absolute top=-70 left=0 right=0 style="margin: auto;"}
+
+::::
+
+## [O Pêndulo Duplo]{.title-sec}
+
+<video data-autoplay muted loop playsinline controls width="100%">
   <source src="https://assets.tmfss.net/chaosminicurse/ani/trajec_unstable_1.webm" type="video/webm">
     Seu navegador não suporta a tag de vídeo.
 </video>
 
 
-## Sensibilidade às condições iniciais
+## [Sensibilidade às condições iniciais]{.title-sec}
 
 <video data-autoplay muted loop playsinline width="100%">
   <source src="https://assets.tmfss.net/chaosminicurse/ani/trajec_chaos.webm" type="video/webm">
