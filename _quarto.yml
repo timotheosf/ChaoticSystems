@@ -30,6 +30,7 @@ format:
         theme: dark
         logo: "https://assets.tmfss.net/logos/IbitiPhysIcoGrey.svg"
         css: "room/themes/slides.css"
+        incrmental: true
         vcenter: true
         transition: slide
         slide-number: true

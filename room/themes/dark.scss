@@ -26,26 +26,60 @@ $input-color: #dee2e6;
 
 /*-- scss:rules --*/
 
-// Força a cor do bloco de título (título, autor, instituição) no Quarto
-// 1. Títulos em TODO o documento (agora estão livres do cabeçalho!)
+// A Cor "Ponto Fixo" para os títulos e cabeçalhos
 h1, h2, h3, h4, h5, h6 {
-  color: #ffffff !important;
+  color: #708090 !important;
 }
 
-// 2. Cores do bloco de título (nome do autor, afiliação, etc)
 .quarto-title-block, .quarto-title, .quarto-title-meta {
-  color: #dee2e6 !important;
+  color: #708090 !important;
   
   .quarto-title-meta-heading {
-    color: #adb5bd !important;
+    // Aqui escurecemos um tiquinho (ou clareamos) só para o subtítulo ficar elegante
+    // Mas pode usar o #708090 aqui também se quiser 100% igual!
+    color: #708090 !important; 
   }
 }
 
-// Esconde o botão original do Quarto
+// Mantém o botão nativo invisível para usarmos o nosso ícone circle-half
 .quarto-color-scheme-toggle {
-  display: none !important; 
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
+
 .navbar-brand img {
   max-height: 30px !important; // Ajuste esse número se quiser maior ou menor
   width: auto;
+}
+
+// ==========================================
+// CORES "PONTO FIXO" PARA NAVEGAÇÃO
+// ==========================================
+
+// 1. NAVBAR (Barra Superior) - Blindado contra o Zephyr
+.navbar-brand,                      
+.navbar-nav .nav-link,              
+.navbar-nav .show > .nav-link,      
+.navbar-nav .nav-link.active,       
+.navbar-nav .nav-link:hover {       
+  color: #708090 !important;
+}
+
+// 2. SIDEBAR (Menu Lateral)
+.sidebar .sidebar-item-text,        
+.sidebar .sidebar-link,             
+.sidebar .sidebar-title,
+.sidebar .sidebar-link.active,      
+.sidebar .sidebar-item-text:hover,
+.sidebar .sidebar-link:hover {
+  color: #708090 !important;
+}
+
+// 3. TRUQUE DE USABILIDADE (Sem deslocar o layout!)
+// Usamos text-shadow para engrossar a letra sem mudar a largura física dela
+.navbar-nav .nav-link.active,
+.sidebar .sidebar-link.active {
+  font-weight: normal !important;
+  text-shadow: 0 0 0.6px #708090, 0 0 0.6px #708090 !important;
 }

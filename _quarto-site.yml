@@ -33,7 +33,7 @@ book:
 
 
         title: "Sistemas Caóticos"
-        search: true # Cria a barra de pesquisa (Search) automaticamente
+        search: true
         left:
             - text: "Home"
               href: index.qmd
@@ -53,23 +53,23 @@ book:
                 - text: "Separated link"
                   href: separated.qmd
         right:
-            - icon: easel # Ícone de um quadro de apresentação (alternativas: 'projector' ou 'display')
-              href: https://chaosminicurse.tmfss.net/slides # Aqui você coloca o link de saída do seu Reveal.js
-              #title: "Slides do Minicurso"
-              #aria-label: "Apresentação"
-            - text: "|" # Nossa primeira barrinha divisória
-            - icon: github # Puxa a logo do GitHub automaticamente
+            - icon: easel
+              href: https://chaosminicurse.tmfss.net/slides
+            - icon: github
               href: https://github.com/tmfss/ChaoticSystems
               target: _blank
-              #title: "Código Fonte (GitHub)"
-              #aria-label: "GitHub"
-            - text: "|" # Nossa segunda barrinha divisória
             - icon: circle-half
-              menu:
-                - text: "Light"
-                  icon: sun
-                  href: "javascript:void(0)" 
-                - text: "Dark"
-                  icon: moon-stars
-                  href: "javascript:void(0)" 
-            - text: " " # Nossa segunda barrinha divisória
+              href: "javascript:void(0)"
+
+
+
+
+
+
+
+
+
+
+
+
+
